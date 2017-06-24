@@ -613,26 +613,39 @@ function updateScore() {
 }
 
 function makeBackground() {
-    var midPoint = new Point([0,paper.view.size.height/2]);
-    var roadVariance = new Point([0,5 + Math.ceil(Math.random()*20)]);
+    var NUM_POINTS = 20;
+    var roadVariance = new Point([0,6 + Math.ceil(Math.random()*TANK_SIZE/2)]);
     var startx = -20; var starty = 0;
     var path = new Path({strokeColor: "#222",
                         strokeWidth: config.TANK_WIDTH});
     var path2 = new Path({strokeColor: "#222",
                         strokeWidth: config.TANK_WIDTH});
     if (config.MODE == aspect.LANDSCAPE) {
-        for (var i = 0; i < 10 ; i++) {
+        for (var i = 0; i < NUM_POINTS ; i++) {
             var temp = Point.random() * roadVariance
             + new Point([startx,paper.view.size.height/4]);
             var tempCircle = new Point(temp.x, temp.y + starty);
-            if (i > 3) {
-                path2.add(new Point(temp.x, temp.y));
-            } else if (i == 3) {
-                path2.add(new Point(temp.x, temp.y + starty));
+            if (i > NUM_POINTS/2) {
+                var temp2 = new Point(temp.x, temp.y - secondary_y);
+                path2.add(temp2);
+                secondary_y += paper.view.size.height/(NUM_POINTS + NUM_POINTS/2);
+                new Path.Circle({
+                    center : temp2,
+                    fillColor : "#ddd",
+                    radius : config.TANK_WIDTH/20
+                });
+            } else if (i == Math.floor(NUM_POINTS/2) ) {
+                path2.add(tempCircle);
+                var secondary_y = -TANK_SIZE*6;
             }
-            startx += paper.view.size.width/8;
-            starty += paper.view.size.height/20;
+            startx += paper.view.size.width/18;
+            starty += paper.view.size.height/(NUM_POINTS + NUM_POINTS/2);
             path.add(tempCircle);
+            new Path.Circle({
+                center : tempCircle,
+                fillColor : "#ddd",
+                radius : config.TANK_WIDTH/20
+            });
 
         }
     }
