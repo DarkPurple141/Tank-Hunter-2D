@@ -1,10 +1,16 @@
 // setup
 // 1.5
 
-var TANK_SIZE = 30;
+TANK_SIZE = 30;
+
+aspect = {
+    PORTRAIT : "PORTRAIT",
+    LANDSCAPE : "LANDSCAPE"
+}
 
 config = {
     TANK_WIDTH : TANK_SIZE,
+    MODE : aspect.LANDSCAPE,
     TANK_HEIGHT : Math.floor(TANK_SIZE * 1.5),
     MAX_HP: 5,
     MAX_DISTANCE: 2000,
@@ -433,7 +439,7 @@ function Tank (x,y,color,base_color,team) {
                 if (tanks[i] === this || tanks[i].team == this.team) continue;
                 if (this.vision.bounds.intersects(tanks[i].parts[0].bounds)) {
                     // in vision cone bounds
-                    if (tanks[i].turret.intersects(this.vision.cent))
+                    if (tanks[i].parts[1].intersects(this.vision.cent))
                         this.fire();
                     else if (tanks[i].parts[0].intersects(this.vision.far_right))
                         this.rotate(1);
@@ -556,12 +562,26 @@ function buildTeam(startx, starty, team, num) {
     }
 }
 
+function buildVerticalTeam(startx, starty, team, num) {
+    for (var i=0; i<num; i++) {
+        var color = team ? "#115511" : "#444444";
+        var color_secondary = team ? "#446611" : "#333333";
+        var temp = new Tank(Math.floor(40*Math.random()) + startx,
+                starty + 20,
+                color,color_secondary,team);
+        team ? temp.animate(-90) : temp.rotate(180);
+        if (!team) temp.animate(-90);
+        tanks.push(temp);
+        starty += paper.view.size.height/(num+1);
+    }
+}
+
 function gameInit() {
     config.score = 0;
     config.kills = 0;
     document.getElementById('gameover').style.display="none";
     config.enemies = Math.ceil(Math.random()*5);
-    var allies = Math.ceil(Math.random()*4);
+    config.allies =  Math.ceil(Math.random()*4);
     user = new Tank();
     updateScore();
     user.animate(-90);
@@ -569,12 +589,21 @@ function gameInit() {
     blasts = new Blast();
     smoke = new Smoke();
     shells = new Shell();
-
     tanks = [user];
-    buildTeam(100,config.TANK_HEIGHT,true, config.enemies);
-    buildTeam(140,paper.view.size.height - config.TANK_HEIGHT * 2,false, allies);
+    config.MODE == aspect.LANDSCAPE ? buildLandscapeSetup() : buildPortraitSetup();
+
     running = true;
     gameover = false;
+}
+
+function buildLandscapeSetup() {
+    buildVerticalTeam(2*config.TANK_HEIGHT,config.TANK_HEIGHT,false,config.allies);
+    buildVerticalTeam(paper.view.size.width - 2*config.TANK_HEIGHT,config.TANK_HEIGHT,true,config.enemies);
+}
+
+function buildPortraieSetup() {
+    buildTeam(100,config.TANK_HEIGHT,true, config.enemies);
+    buildTeam(140,paper.view.size.height - config.TANK_HEIGHT * 2,false, config.allies);
 }
 
 function updateScore() {
