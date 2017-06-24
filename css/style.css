@@ -1,6 +1,6 @@
 html,
 body {
-    margin: 0;
+    margin: 20;
     overflow: hidden;
     height: 100%;
 }
@@ -11,8 +11,8 @@ canvas {
 }
 
 body {
-    background: #000;
-    font-family:Helvetica,Arial;
+    background: #444;
+    font-family: "Open Sans";
 }
 
 .footer {

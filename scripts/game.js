@@ -1,13 +1,15 @@
 // setup
 // 1.5
 
+var TANK_SIZE = 30;
+
 config = {
-    TANK_WIDTH : 30,
-    TANK_HEIGHT : Math.floor(30 * 1.5),
+    TANK_WIDTH : TANK_SIZE,
+    TANK_HEIGHT : Math.floor(TANK_SIZE * 1.5),
     MAX_HP: 5,
     MAX_DISTANCE: 2000,
     BULLET_LIFE: 60,
-    MAX_SPEED : Math.floor(30/10) + 1,
+    MAX_SPEED : Math.floor(TANK_SIZE/10) + 1,
     AI_ACCURACY : 5,
     score : 0,
     enemies : 0,
@@ -160,14 +162,14 @@ function VisionCone (x,y) {
     var cone = new Path([x,y+config.TANK_WIDTH/2], // 0
         [x,y], // 1
         [x,y - config.TANK_WIDTH/2], //2
-        [x,y-4*config.TANK_WIDTH], // 3
+        [x,y-3*config.TANK_WIDTH], // 3
         [x-5*config.TANK_HEIGHT,y-4*config.TANK_WIDTH], // 4
         [x-5*config.TANK_HEIGHT,y- config.TANK_WIDTH], // 5
         [x-5*config.TANK_HEIGHT,y - config.TANK_WIDTH/5], // 6
         [x-5*config.TANK_HEIGHT,y + config.TANK_WIDTH/5], // 7
         [x-5*config.TANK_HEIGHT,y+ config.TANK_WIDTH], // 8
         [x-5*config.TANK_HEIGHT,y+4*config.TANK_WIDTH], // 9
-        [x,y+4*config.TANK_WIDTH] // 10
+        [x,y+3*config.TANK_WIDTH] // 10
     );
     cone.closed = true;
 
@@ -321,26 +323,26 @@ function Tank (x,y,color,base_color,team) {
         vision : vision,
 
         animate : function(dir) {
-            var rotate = 1/3*dir;
-            this.gun_angle = (this.gun_angle + rotate) % 360;
+            var rotate = this.velocity ? .5*dir : dir;
+            this.gun_angle = (this.gun_angle + rotate + 360) % 360;
             this.turret.rotate(rotate, this.parts[1].position);
             this.vision.rotate(rotate, this.vision.segments[1].point);
             this.vision.group.rotate(rotate,this.vision.segments[1].point);
         },
         turretCorrection : function () {
-            var diff = (this.angle - (this.gun_angle + 180) % 360);
-            if (Math.abs(diff) > 1) {
+            var diff = (this.angle - this.gun_angle);
+            if (Math.abs(diff) > 5) {
                 if (Math.abs(diff) < 180) {
                     if (diff > 1) {
-                        this.animate(.5);
+                        this.animate(0.5);
                     } else if (diff < -1) {
-                        this.animate(-.5);
+                        this.animate(-0.5);
                     }
-                } else {
+                } else { // diff >= 180
                     if (diff > 1) {
-                        this.animate(-.5);
+                        this.animate(-0.5);
                     } else if (diff < -1) {
-                        this.animate(.5);
+                        this.animate(0.5);
                     }
                 }
             }
@@ -397,12 +399,16 @@ function Tank (x,y,color,base_color,team) {
         rotate : function (angle) {
             for (var i=0;i<parts.length;i++) {
                 if (i > 1) {
-                    this.animate(angle);
+                    if (this.velocity) {
+                        this.animate(angle*2);
+                    } else {
+                        this.animate(angle);
+                    }
                     break;
                 }
                 this.parts[i].rotate(angle);
             };
-            this.angle = (this.angle + angle ) % 360;
+            this.angle = (this.angle + angle + 360) % 360;
         },
         checkCollisions : function () {
             for (var i = 0; i< tanks.length; i++) {
@@ -423,7 +429,7 @@ function Tank (x,y,color,base_color,team) {
         update : function () {
             for (var i=0; i<tanks.length; i++) {
                 if (tanks[i] === this || tanks[i].team == this.team) continue;
-                if (this.vision.intersects(tanks[i].parts[0])) {
+                if (this.vision.bounds.intersects(tanks[i].parts[0].bounds)) {
                     // in vision cone bounds
                     if (tanks[i].turret.intersects(this.vision.cent))
                         this.fire();
@@ -465,7 +471,6 @@ function Tank (x,y,color,base_color,team) {
             var vector = tanks[index].parts[0].position - this.parts[0].position;
             var normalised_angle = this.angle > 180 ? this.angle - 360 : this.angle;
             var diff = vector.angle - normalised_angle;
-            console.log(vector.angle, normalised_angle, diff);
             if (Math.abs(diff) > 20) {
                 if (Math.abs(diff) < 180) {
                     if (diff > 20) {
@@ -542,8 +547,8 @@ function buildTeam(startx, starty, team, num) {
         var temp = new Tank(10 + startx,
                 starty + Math.floor(40*Math.random()),
                 color,color_secondary,team);
-        team ? temp.animate(-270) : temp.rotate(180);
-        if (!team) temp.animate(-270);
+        team ? temp.animate(-90) : temp.rotate(180);
+        if (!team) temp.animate(-90);
         tanks.push(temp);
         startx += paper.view.size.width/(num+1);
     }
@@ -553,18 +558,19 @@ function gameInit() {
     config.score = 0;
     config.kills = 0;
     document.getElementById('gameover').style.display="none";
-    config.enemies = Math.ceil(Math.random()*2);
-    var allies = Math.ceil(Math.random()*5);
+    config.enemies = Math.ceil(Math.random()*5);
+    var allies = Math.ceil(Math.random()*4);
     user = new Tank();
     updateScore();
-    user.animate(270);
+    user.animate(-90);
+    user.rotate(180);
     blasts = new Blast();
     smoke = new Smoke();
     shells = new Shell();
 
     tanks = [user];
-    //buildTeam(100,config.TANK_HEIGHT,true, config.enemies);
-    //buildTeam(140,paper.view.size.height - config.TANK_HEIGHT * 2,false, allies);
+    buildTeam(100,config.TANK_HEIGHT,true, config.enemies);
+    buildTeam(140,paper.view.size.height - config.TANK_HEIGHT * 2,false, allies);
     running = true;
     gameover = false;
 }
@@ -573,6 +579,19 @@ function updateScore() {
     document.querySelector('div.stats span.score').innerHTML = config.score;
     document.querySelector('div.stats span.kills').innerHTML = config.kills;
     document.querySelector('div#inner').style.height = 100*(user.health/config.MAX_HP) + "%";
+}
+
+function makeBackground() {
+    var maxPoint = new Point([paper.view.size.width,paper.view.size.height]);
+    for (var i = 0; i < 10 ; i++) {
+        var temp = Point.random() * maxPoint;
+        var tempCircle = new Path.Circle({
+            center : temp,
+            radius : 4,
+            fillColor : "black"
+        })
+    }
+    var mainLayer = new Layer();
 }
 
 function newGame() {
@@ -588,6 +607,7 @@ window.newGame = newGame;
 
 // instigates a new game on load
 (function(){
+    makeBackground();
     gameInit();
 })();
 
@@ -606,10 +626,10 @@ function onKeyDown(event) {
 // controls basic controls
 function processEvents() {
     if (Key.isDown('up')) {
-        user.accelerate(-1);
+        user.accelerate(1);
     }
     if (Key.isDown('down')) {
-        user.accelerate(1);
+        user.accelerate(-1);
     }
     if (Key.isDown('left')) {
         user.rotate(-1);
