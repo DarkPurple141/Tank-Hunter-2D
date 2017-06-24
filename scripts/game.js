@@ -390,10 +390,12 @@ function Tank (x,y,color,base_color,team) {
             return this.clone(p);
         },
         decelerate : function () {
-            if (this.velocity >= 1) {
-                this.velocity -= 1;
-            } else if (this.velocity <= -1) {
-                this.velocity += 1;
+            this.velocity *= 0.8;
+
+            if (this.velocity > 0 && this.velocity < .1) {
+                this.velocity = 0;
+            } else if (this.velocity < 0 && this.velocity > -.1) {
+                this.velocity = 0;
             };
         },
         rotate : function (angle) {
@@ -445,7 +447,7 @@ function Tank (x,y,color,base_color,team) {
                         < config.TANK_WIDTH) {
                         this.accelerate(-1);
                     } else {
-                        this.accelerate(1);
+                        this.accelerate(.5);
                     }
                     return;
                 }
