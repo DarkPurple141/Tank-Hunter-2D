@@ -169,12 +169,12 @@ function VisionCone (x,y) {
         [x,y], // 1
         [x,y - config.TANK_WIDTH/2], //2
         [x,y-3*config.TANK_WIDTH], // 3
-        [x-5*config.TANK_HEIGHT,y-4*config.TANK_WIDTH], // 4
-        [x-5*config.TANK_HEIGHT,y- config.TANK_WIDTH], // 5
-        [x-5*config.TANK_HEIGHT,y - config.TANK_WIDTH/5], // 6
-        [x-5*config.TANK_HEIGHT,y + config.TANK_WIDTH/5], // 7
-        [x-5*config.TANK_HEIGHT,y+ config.TANK_WIDTH], // 8
-        [x-5*config.TANK_HEIGHT,y+4*config.TANK_WIDTH], // 9
+        [x-6*config.TANK_HEIGHT,y-4*config.TANK_WIDTH], // 4
+        [x-6*config.TANK_HEIGHT,y- config.TANK_WIDTH], // 5
+        [x-6*config.TANK_HEIGHT,y - config.TANK_WIDTH/5], // 6
+        [x-6*config.TANK_HEIGHT,y + config.TANK_WIDTH/5], // 7
+        [x-6*config.TANK_HEIGHT,y+ config.TANK_WIDTH], // 8
+        [x-6*config.TANK_HEIGHT,y+4*config.TANK_WIDTH], // 9
         [x,y+3*config.TANK_WIDTH] // 10
     );
     cone.closed = true;
@@ -369,12 +369,21 @@ function Tank (x,y,color,base_color,team) {
                 this.reload--;
             }
 
-            var dir = new Point({length: this.velocity/2,
+            var multiplier = this.onRoad();
+
+            var dir = new Point({length: this.velocity/3,
                                 angle: this.velocity > 0 ?
                                 this.angle : this.angle+180});
             for (var i=0;i<parts.length;i++) {
-                this.parts[i].position += dir;
+                this.parts[i].position += dir * multiplier;
             }
+        },
+        onRoad : function () {
+            var multiplier = 1;
+            if (this.parts[0].intersects(road) || this.parts[0].intersects(road2)) {
+                multiplier = 1.5;
+            }
+            return multiplier;
         },
         checkOffMap : function () {
             if (this.parts[0].position.y > paper.view.size.height) {
@@ -616,9 +625,9 @@ function makeBackground() {
     var NUM_POINTS = 20;
     var roadVariance = new Point([0,6 + Math.ceil(Math.random()*TANK_SIZE/2)]);
     var startx = -20; var starty = 0;
-    var path = new Path({strokeColor: "#222",
+    road = new Path({strokeColor: "#222",
                         strokeWidth: config.TANK_WIDTH});
-    var path2 = new Path({strokeColor: "#222",
+    road2 = new Path({strokeColor: "#222",
                         strokeWidth: config.TANK_WIDTH});
     if (config.MODE == aspect.LANDSCAPE) {
         for (var i = 0; i < NUM_POINTS ; i++) {
@@ -627,7 +636,7 @@ function makeBackground() {
             var tempCircle = new Point(temp.x, temp.y + starty);
             if (i > NUM_POINTS/2) {
                 var temp2 = new Point(temp.x, temp.y - secondary_y);
-                path2.add(temp2);
+                road2.add(temp2);
                 secondary_y += paper.view.size.height/(NUM_POINTS + NUM_POINTS/2);
                 new Path.Circle({
                     center : temp2,
@@ -635,12 +644,12 @@ function makeBackground() {
                     radius : config.TANK_WIDTH/20
                 });
             } else if (i == Math.floor(NUM_POINTS/2) ) {
-                path2.add(tempCircle);
+                road2.add(tempCircle);
                 var secondary_y = -TANK_SIZE*6;
             }
             startx += paper.view.size.width/18;
             starty += paper.view.size.height/(NUM_POINTS + NUM_POINTS/2);
-            path.add(tempCircle);
+            road.add(tempCircle);
             new Path.Circle({
                 center : tempCircle,
                 fillColor : "#ddd",
@@ -649,8 +658,10 @@ function makeBackground() {
 
         }
     }
-    path.smooth();
-    path2.smooth();
+    road.smooth();
+    road.simplify();
+    road2.smooth();
+    road2.simplify();
     //path2.selected = true;
     //path.selected = true;
     var mainLayer = new Layer();
