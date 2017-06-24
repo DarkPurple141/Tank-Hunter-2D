@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Tank Hunter</title>
+        <!-- Load the Paper.js library -->
+        <script type="text/javascript" src="paper/paper-full.min.js"></script>
+        <script type="text/paperscript" canvas="game" src="paper/game.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+<body>
+    <div id="gameover" class="gameover">
+        <p>Game Over!</p>
+        <a style="cursor:pointer;" onclick="newGame();"><u>Play again?</u></a>
+    </div>
+    <div class="stats">
+        Score: <span class="score">0</span><br>
+        Kills: <span class="kills">0</span>
+        <div id="outer">
+            <div id="inner">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <canvas style="background-color:#ccaa77" id="game" resize stats>
+    </canvas>
+    <div id="footer" class="footer">
+        <a href=".">Tank Hunter</a>.
+        To Play: <b>&#8592;</b> and <b>&#8594;</b> to rotate.  <b>&#8593;</b> and <b>&#8595;</b> to move tank.
+        <b>A</b> and <b>D</b> rotate turret. <b>Space</b> to fire. <b>P</b> to pause.
+        Follow @<a href="http://twitter.com/#/al_hinds">al_hinds</a> for updates.
+        Made with <a href="http://paperjs.org">Paper.js</a>
+    </div>
+</body>
+</html>
