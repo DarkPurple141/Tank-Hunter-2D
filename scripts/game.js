@@ -1,7 +1,7 @@
 // setup
 // 1.5
 
-TANK_SIZE = 30;
+TANK_SIZE = 20;
 
 aspect = {
     PORTRAIT : "PORTRAIT",
@@ -221,7 +221,7 @@ function VisionCone (x,y) {
 }
 
 function Blast () {
-    var NUM_POINTS = 30
+    var NUM_POINTS = 25;
     this.group = new Group();
     this.children = this.group.children;
 
@@ -233,7 +233,7 @@ function Blast () {
             radius2: 1,
             fillColor: "red",
             strokeColor : "orange",
-            strokeWidth : NUM_POINTS/12,
+            strokeWidth : TANK_SIZE/10,
             timeToDie : 25,
         });
 
@@ -243,7 +243,7 @@ function Blast () {
             ang += 360/(NUM_POINTS)
             segs[i].vector = new Point({
                 angle: ang,
-                length: Math.random()
+                length: TANK_SIZE/200 + Math.random()
             });
         }
         this.group.addChild(temp);
@@ -256,7 +256,7 @@ function Blast () {
             }
             var segs = cloud.segments;
             for (var i = 0; i<segs.length; i++) {
-                segs[i].point += segs[i].vector * cloud.timeToDie/3;
+                segs[i].point += segs[i].vector * cloud.timeToDie/8;
             }
             if (cloud.timeToDie < 10) {
                 cloud.timeToDie-=0.5;
@@ -613,15 +613,33 @@ function updateScore() {
 }
 
 function makeBackground() {
-    var maxPoint = new Point([paper.view.size.width,paper.view.size.height]);
-    for (var i = 0; i < 10 ; i++) {
-        var temp = Point.random() * maxPoint;
-        var tempCircle = new Path.Circle({
-            center : temp,
-            radius : 4,
-            fillColor : "black"
-        })
+    var midPoint = new Point([0,paper.view.size.height/2]);
+    var roadVariance = new Point([0,5 + Math.ceil(Math.random()*20)]);
+    var startx = -20; var starty = 0;
+    var path = new Path({strokeColor: "#222",
+                        strokeWidth: config.TANK_WIDTH});
+    var path2 = new Path({strokeColor: "#222",
+                        strokeWidth: config.TANK_WIDTH});
+    if (config.MODE == aspect.LANDSCAPE) {
+        for (var i = 0; i < 10 ; i++) {
+            var temp = Point.random() * roadVariance
+            + new Point([startx,paper.view.size.height/4]);
+            var tempCircle = new Point(temp.x, temp.y + starty);
+            if (i > 3) {
+                path2.add(new Point(temp.x, temp.y));
+            } else if (i == 3) {
+                path2.add(new Point(temp.x, temp.y + starty));
+            }
+            startx += paper.view.size.width/8;
+            starty += paper.view.size.height/20;
+            path.add(tempCircle);
+
+        }
     }
+    path.smooth();
+    path2.smooth();
+    //path2.selected = true;
+    //path.selected = true;
     var mainLayer = new Layer();
 }
 
