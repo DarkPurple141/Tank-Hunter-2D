@@ -15,6 +15,27 @@ body {
     font-family: "Open Sans";
 }
 
+a#script {
+    cursor: pointer;
+}
+
+a#script:hover {
+    
+}
+
+.sidenav {
+    height: 30%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
 .footer {
     position:absolute;
     bottom:0;

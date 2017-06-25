@@ -148,10 +148,8 @@ function Shell () {
             this.group.addChild(
                 new Path.Circle({
                     center : cent,
-                    radius : config.TANK_WIDTH/30,
+                    radius : config.TANK_WIDTH/15,
                     fillColor: 'black',
-                    strokeColor: 'black',
-                    strokeWidth: 0,
                     data : {
                         timeToDie : config.BULLET_LIFE,
                         vector : vector,
@@ -371,7 +369,7 @@ function Tank (x,y,color,base_color,team) {
 
             var multiplier = this.onRoad();
 
-            var dir = new Point({length: this.velocity/3,
+            var dir = new Point({length: this.velocity/2,
                                 angle: this.velocity > 0 ?
                                 this.angle : this.angle+180});
             for (var i=0;i<parts.length;i++) {
@@ -381,7 +379,7 @@ function Tank (x,y,color,base_color,team) {
         onRoad : function () {
             var multiplier = 1;
             if (this.parts[0].intersects(road) || this.parts[0].intersects(road2)) {
-                multiplier = 1.5;
+                multiplier = 1.2;
             }
             return multiplier;
         },
@@ -438,7 +436,7 @@ function Tank (x,y,color,base_color,team) {
         fire : function () {
             if (!this.reload) {
                 this.reload = 30;
-                var vector = new Point({length : 6, angle: this.gun_angle});
+                var vector = new Point({length : Math.floor(TANK_SIZE/3), angle: this.gun_angle});
                 shells.fire(this.turret.segments[7],vector,this);
             }
         },
@@ -625,9 +623,9 @@ function makeBackground() {
     var NUM_POINTS = 20;
     var roadVariance = new Point([0,6 + Math.ceil(Math.random()*TANK_SIZE/2)]);
     var startx = -20; var starty = 0;
-    road = new Path({strokeColor: "#222",
+    road = new Path({strokeColor: "#666",
                         strokeWidth: config.TANK_WIDTH});
-    road2 = new Path({strokeColor: "#222",
+    road2 = new Path({strokeColor: "#666",
                         strokeWidth: config.TANK_WIDTH});
     if (config.MODE == aspect.LANDSCAPE) {
         for (var i = 0; i < NUM_POINTS ; i++) {

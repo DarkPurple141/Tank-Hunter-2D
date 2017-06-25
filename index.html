@@ -12,7 +12,7 @@
 <body>
     <div id="gameover" class="gameover">
         <p>Game Over!</p>
-        <a style="cursor:pointer;" onclick="newGame();"><u>Play again?</u></a>
+        <a id="script" onclick="newGame();"><u>Play again?</u></a>
     </div>
     <div class="stats">
         Score: <span class="score">0</span><br>
@@ -25,12 +25,18 @@
     </div>
     <canvas style="background-color:#ccaa77" id="game" resize stats>
     </canvas>
+    <div class="sidenav" id="settings"></div>
     <div id="footer" class="footer">
         <a href=".">Tank Hunter</a>.
         To Play: <b>&#8592;</b> and <b>&#8594;</b> to rotate.  <b>&#8593;</b> and <b>&#8595;</b> to move tank.
         <b>A</b> and <b>D</b> rotate turret. <b>Space</b> to fire. <b>P</b> to pause.
-        Follow @<a href="http://twitter.com/#/al_hinds">al_hinds</a> for updates.
+        Follow @<a href="http://twitter.com/#/al_hinds">al_hinds</a> for updates. <a id="script" onclick="slide();">Settings</a>.
         Made with <a href="http://paperjs.org">Paper.js</a>
     </div>
+    <script>
+    function slide() {
+        document.getElementById("settings").style.width = "250px";
+    }
+        </script>
 </body>
 </html>
