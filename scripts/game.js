@@ -18,7 +18,8 @@ config = {
     MAX_SPEED : Math.floor(TANK_SIZE/10) + 1,
     AI_ACCURACY : 5,
     score : 0,
-    enemies : 0,
+    enemies : 2,
+    level : 0,
     kills : 0
 };
 
@@ -536,8 +537,13 @@ function gameOver () {
     var go = document.getElementById('gameover');
     if (config.enemies) {
         go.querySelector('p').innerHTML = "Game Over!";
+        config.enemies = 2;
+        config.level = 0;
+        config.score = 0;
+        config.kills = 0;
     } else {
-        go.querySelector('p').innerHTML = "Congratulations!!";
+        config.level++;
+        go.querySelector('p').innerHTML = "Ready for a harder challenge?";
     }
     go.style.display = 'block';
 }
@@ -584,11 +590,10 @@ function buildVerticalTeam(startx, starty, team, num) {
 }
 
 function gameInit() {
-    config.score = 0;
-    config.kills = 0;
+    document.querySelector('div.stats span.level').innerHTML = config.level;
     document.getElementById('gameover').style.display="none";
-    config.enemies = Math.ceil(Math.random()*5);
-    config.allies =  Math.ceil(Math.random()*4);
+    config.allies =  2 + Math.floor(config.level/2);
+    config.enemies = Math.ceil(Math.random()*2) + config.level;
     user = new Tank();
     updateScore();
     user.animate(-90);

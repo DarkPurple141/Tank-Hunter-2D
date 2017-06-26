@@ -5,6 +5,10 @@ body {
     height: 100%;
 }
 
+p, h4 {
+    margin: 0;
+}
+
 canvas {
     width: 100%;
     height: 100%;
@@ -20,7 +24,7 @@ a#script {
 }
 
 a#script:hover {
-    
+
 }
 
 .sidenav {
@@ -63,7 +67,7 @@ a#script:hover {
 .gameover {
     display: none;
     position: absolute;
-    font-size: 35px;
+    font-size: 1em;
     font-weight: bold;
     left: 38%;
     top: 30%;
@@ -80,12 +84,16 @@ a#script:hover {
 
 .gameover a {
     color: #fff;
-    font-size: 20px;
+    font-size: .9em;
     text-align: center;
     font-weight: normal;
 }
 
 .stats {
+    color: #fff;
+    background-color: rgba(60,60,60,0.8);
+    font-size:0.85em;
+    padding:0.5em;
     position: absolute;
     left: auto !important;
     top: 10px;
@@ -94,16 +102,14 @@ a#script:hover {
 }
 
 #outer {
-    width: 30px;
-    height: 120px;
+    width: 33%;
+    height: 90px;
     top : 5px;
-    left : 10px;
+    left : 33%;
     border: 2px solid #ccc;
     background-color: red;
     overflow: hidden;
-
     position: relative;
-
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
