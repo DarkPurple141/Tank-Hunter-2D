@@ -10,6 +10,7 @@ p, h4 {
 }
 
 canvas {
+    background-color: #ccaa77;
     width: 100%;
     height: 100%;
 }
@@ -67,7 +68,7 @@ a#script:hover {
 .gameover {
     display: none;
     position: absolute;
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: bold;
     left: 38%;
     top: 30%;
@@ -84,7 +85,7 @@ a#script:hover {
 
 .gameover a {
     color: #fff;
-    font-size: .9em;
+    font-size: 1em;
     text-align: center;
     font-weight: normal;
 }

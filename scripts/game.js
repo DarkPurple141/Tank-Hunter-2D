@@ -1,7 +1,7 @@
 // setup
 // 1.5
 
-TANK_SIZE = 20;
+TANK_SIZE = 25;
 
 aspect = {
     PORTRAIT : "PORTRAIT",
