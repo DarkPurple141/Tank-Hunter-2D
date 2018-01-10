@@ -89,9 +89,11 @@ a#script:hover {
    text-align: center;
 }
 
+/*
 .gameover-scores p:nth-child(odd) {
    background-color: darkgrey;
 }
+*/
 
 .gameover {
     display: none;
