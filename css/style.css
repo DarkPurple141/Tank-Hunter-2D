@@ -86,7 +86,11 @@ a#script:hover {
 
 .gameover-scores p {
    padding: 10px;
-   transform-style: center;
+   text-align: center;
+}
+
+.gameover-scores p:nth-child(odd) {
+   background-color: darkgrey;
 }
 
 .gameover {
