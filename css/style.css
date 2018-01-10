@@ -65,22 +65,39 @@ a#script:hover {
     padding-right: 0.25em;
 }
 
+.gameover .inner {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   -moz-border-radius: 12px;
+   -webkit-border-radius: 12px;
+   border-radius: 12px;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+}
+
+.gameover .inner .gameover-scores {
+   margin: auto;
+}
+
+.gameover-scores p {
+   padding: 10px;
+   transform-style: center;
+}
+
 .gameover {
     display: none;
-    position: absolute;
+    position: fixed;
     font-size: 1.5em;
     font-weight: bold;
-    left: 38%;
-    top: 30%;
+    width: 100%;
+    height: 100%;
     color: #fff;
     background-color: rgba(60,60,60,0.8);
-    padding: 32px;
-    -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
-    border-radius: 12px;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
 }
 
 .gameover a {
