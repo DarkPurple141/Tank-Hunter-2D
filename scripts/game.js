@@ -8,9 +8,14 @@ aspect = {
     LANDSCAPE : "LANDSCAPE"
 }
 
+function determineMode() {
+   return Window.innerWidth > Window.innerHeight ? aspect.LANDSCAPE : aspect.PORTRAIT
+}
+
 config = {
+    username: "unset",
     TANK_WIDTH : TANK_SIZE,
-    MODE : aspect.LANDSCAPE,
+    MODE : determineMode(),
     TANK_HEIGHT : Math.floor(TANK_SIZE * 1.5),
     MAX_HP: 5,
     MAX_DISTANCE: 2000,
@@ -613,7 +618,7 @@ function buildLandscapeSetup() {
     buildVerticalTeam(paper.view.size.width - 2*config.TANK_HEIGHT,config.TANK_HEIGHT,true,config.enemies);
 }
 
-function buildPortraieSetup() {
+function buildPortraitSetup() {
     buildTeam(100,config.TANK_HEIGHT,true, config.enemies);
     buildTeam(140,paper.view.size.height - config.TANK_HEIGHT * 2,false, config.allies);
 }
@@ -684,6 +689,7 @@ window.newGame = newGame;
 // instigates a new game on load
 (function(){
     makeBackground();
+    config.username = prompt("Please enter a username..")
     gameInit();
 })();
 

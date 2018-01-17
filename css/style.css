@@ -3,6 +3,14 @@ body {
     margin: 0;
     overflow: hidden;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    background: #444;
+    font-family: "Open Sans";
 }
 
 p, h4 {
@@ -11,25 +19,29 @@ p, h4 {
 
 canvas {
     background-color: #ccaa77;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    min-width: 90vmax;
+    max-width: 100vw;
+    height: 90vh;
+    max-height: 95vh;
+    margin-bottom: 10vh;
 }
 
-body {
-    background: #444;
-    font-family: "Open Sans";
+@media screen and (max-width: 600px) {
+   canvas {
+      min-width: 100vw;
+      width: 100vw;
+      height: 90vh;
+      max-height: 90vh;
+   }
 }
 
 a#script {
     cursor: pointer;
 }
 
-a#script:hover {
-
-}
-
 .sidenav {
-    height: 30%;
+    height: 40%;
     width: 0;
     position: fixed;
     z-index: 1;
@@ -41,15 +53,18 @@ a#script:hover {
     padding-top: 60px;
 }
 
+footer {
+   position:absolute;
+   bottom: 0;
+   background-color: rgba(60,60,60,0.8);
+   width: 100%;
+}
+
 .footer {
-    position:absolute;
-    bottom:0;
-    color:#ff0000;
-    background-color: rgba(60,60,60,0.8);
-    font-size:0.75em;
-    padding:0.5em;
-    color:#ddd;
-    width: 100%
+    color: #ff0000;
+    font-size:0.85em;
+    padding: 1em;
+    color: #ddd;
 }
 
 .footer a {
