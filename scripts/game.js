@@ -2,6 +2,7 @@
 // 1.5
 
 TANK_SIZE = 25;
+MOBILE_TANK_SIZE = 20;
 
 aspect = {
     PORTRAIT : "PORTRAIT",
@@ -12,15 +13,19 @@ function determineMode() {
    return Window.innerWidth > Window.innerHeight ? aspect.LANDSCAPE : aspect.PORTRAIT
 }
 
+function determineTankSize() {
+   return (Window.innerWidth > Window.innerHeight ? TANK_SIZE : MOBILE_TANK_SIZE)
+}
+
 config = {
     username: "unset",
-    TANK_WIDTH : TANK_SIZE,
+    TANK_WIDTH : determineTankSize(),
     MODE : determineMode(),
-    TANK_HEIGHT : Math.floor(TANK_SIZE * 1.5),
+    TANK_HEIGHT : Math.floor(determineTankSize() * 1.5),
     MAX_HP: 5,
     MAX_DISTANCE: 2000,
     BULLET_LIFE: 60,
-    MAX_SPEED : Math.floor(TANK_SIZE/10) + 1,
+    MAX_SPEED : Math.floor(determineTankSize()/11) + 1,
     AI_ACCURACY : 5,
     score : 0,
     enemies : 2,
@@ -703,6 +708,10 @@ function onKeyDown(event) {
         running = !running;
     }
     return false;
+}
+
+function onMouseDown(event) {
+   console.log(event)
 }
 
 // controls basic controls
