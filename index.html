@@ -24,25 +24,52 @@
       </div>
     </div>
     <div class="stats">
-        <h4>Level: <span class="level">0</span></h4>
-        <p>Score: <span class="score">0</span></p>
-        <p>Kills: <span class="kills">0</span></p>
-        <div id="outer">
-            <div id="inner">
-                <div></div>
+      <summary>
+         <div id="outer">
+             <div id="inner">
+                 <div></div>
+             </div>
+         </div>
+         <table>
+            <tbody>
+               <tr>
+                  <td>Level:</td><td><span class="level">0</span></td>
+               </tr>
+               <tr>
+                  <td>Score:</td><td><span class="score">0</span></td>
+               </tr>
+               <tr>
+                  <td>Kills:</td><td><span class="kills">0</span></td>
+               </tr>
+            </tbody>
+         </table>
+      </summary>
+        <div class="settings-button">
+           <img src="svg/cog.svg" alt="a cog icon"/>
+           <a id="script" onclick="slide();">Settings</a>
+        </div>
+
+        <div class="attribution">
+            <div>
+                <p>By <a href="http://twitter.com/#/al_hinds">@al_hinds</a></p>
+                <p>With <a href="http://paperjs.org">Paper.js</a></p>
             </div>
         </div>
     </div>
     <canvas id="game" resize stats>
     </canvas>
-    <div class="sidenav" id="settings"></div>
+    <nav class="sidenav" id="settings">
+      <h2>
+         Coming sometime in 2018..
+      </h2>
+    </nav>
     <footer>
        <div id="footer" class="footer">
-           <a href=".">Tank Hunter</a>.
-           To Play: <b>&#8592;</b> and <b>&#8594;</b> to rotate.  <b>&#8593;</b> and <b>&#8595;</b> to move tank.
-           <b>A</b> and <b>D</b> rotate turret. <b>Space</b> to fire. <b>P</b> to pause.
-           Follow @<a href="http://twitter.com/#/al_hinds">al_hinds</a> for updates. <a id="script" onclick="slide();">Settings</a>.
-           Made with <a href="http://paperjs.org">Paper.js</a>
+           <div>
+              <a href=".">Tank Hunter</a>.
+              To Play: <b>&#8592;</b> and <b>&#8594;</b> to rotate.  <b>&#8593;</b> and <b>&#8595;</b> to move tank.
+              <b>A</b> and <b>D</b> rotate turret. <b>Space</b> to fire. <b>P</b> to pause.
+           </div>
        </div>
     </footer>
     <script>

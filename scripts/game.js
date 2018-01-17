@@ -10,11 +10,11 @@ aspect = {
 }
 
 function determineMode() {
-   return Window.innerWidth > Window.innerHeight ? aspect.LANDSCAPE : aspect.PORTRAIT
+   return window.innerWidth > window.innerHeight ? aspect.LANDSCAPE : aspect.PORTRAIT
 }
 
 function determineTankSize() {
-   return (Window.innerWidth > Window.innerHeight ? TANK_SIZE : MOBILE_TANK_SIZE)
+   return window.innerWidth > window.innerHeight ? TANK_SIZE : MOBILE_TANK_SIZE
 }
 
 config = {
