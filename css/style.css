@@ -11,7 +11,7 @@ body {
 body {
     background: #444;
     font-family: "Open Sans";
-    font-size: normal;
+    font-size: medium;
     line-height: 2;
 }
 
@@ -22,10 +22,25 @@ p, h4 {
 .stats summary {
    display: flex;
    flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+.stats {
+    color: #fff;
+    min-width: 80px;
+    background-color: rgba(60,60,60,0.8);
+    font-size: 0.85rem;
+    padding: 0.5em;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    border-radius: 1em;
 }
 
 .settings-button {
-   margin: 0.2em;
+   margin: 0.8em 0.2em;
    display: flex;
    flex-direction: row;
 }
@@ -47,6 +62,11 @@ p, h4 {
    margin: auto;
 }
 
+.stats table {
+   margin: auto;
+   line-height: normal;
+}
+
 canvas {
     background-color: #ccaa77;
     width: 100vw;
@@ -57,12 +77,50 @@ canvas {
     margin-bottom: 10vh;
 }
 
+#outer {
+    margin: auto;
+    width: 25%;
+    height: 80px;
+    top : 5px;
+    border: 1px solid #ccc;
+    background-color: red;
+    overflow: hidden;
+    position: relative;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#inner, #inner div {
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+}
+
+#inner {
+    border: 1px solid green;
+    border-top-width: 0;
+    background-color: green;
+    bottom: 0;
+    height: 100%;
+}
+
 @media screen and (max-width: 600px) {
    canvas {
       min-width: 100vw;
       width: 100vw;
       height: 90vh;
       max-height: 90vh;
+   }
+
+   .stats {
+      font-size: 0.65rem;
+      min-width: 70px;
+   }
+
+   /* HP bar */
+   #outer {
+      height: 70px;
    }
 
    body {
@@ -161,44 +219,4 @@ footer {
     font-size: 1em;
     text-align: center;
     font-weight: normal;
-}
-
-.stats {
-    color: #fff;
-    min-width: 80px;
-    background-color: rgba(60,60,60,0.8);
-    font-size:0.85rem;
-    padding: 0.5em;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 1;
-    border-radius: 1em;
-}
-
-#outer {
-    width: 25%;
-    height: 80px;
-    top : 5px;
-    border: 1px solid #ccc;
-    background-color: red;
-    overflow: hidden;
-    position: relative;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-}
-
-#inner, #inner div {
-    width: 100%;
-    overflow: hidden;
-    position: absolute;
-}
-
-#inner {
-    border: 1px solid green;
-    border-top-width: 0;
-    background-color: green;
-    bottom: 0;
-    height: 100%;
 }
