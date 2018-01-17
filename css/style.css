@@ -78,10 +78,8 @@ canvas {
 }
 
 #outer {
-    margin: auto;
-    width: 25%;
+    width: 22%;
     height: 80px;
-    top : 5px;
     border: 1px solid #ccc;
     background-color: red;
     overflow: hidden;
@@ -116,6 +114,11 @@ canvas {
    .stats {
       font-size: 0.65rem;
       min-width: 70px;
+   }
+
+   .stats img {
+      max-width: 20px;
+      max-height: 20px;
    }
 
    /* HP bar */
