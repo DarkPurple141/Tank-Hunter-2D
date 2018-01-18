@@ -600,7 +600,7 @@ function buildVerticalTeam(startx, starty, team, num) {
 }
 
 function gameInit() {
-    document.querySelector('div.stats span.level').innerHTML = config.level;
+    document.querySelector('header.stats span.level').innerHTML = config.level;
     document.getElementById('gameover').style.display="none";
     config.allies =  2 + Math.floor(config.level/2);
     config.enemies = Math.ceil(Math.random()*2) + config.level;
@@ -629,9 +629,9 @@ function buildPortraitSetup() {
 }
 
 function updateScore() {
-    document.querySelector('div.stats span.score').innerHTML = config.score;
-    document.querySelector('div.stats span.kills').innerHTML = config.kills;
-    document.querySelector('div#inner').style.height = 100*(user.health/config.MAX_HP) + "%";
+    document.querySelector('header.stats span.score').innerHTML = config.score;
+    document.querySelector('header.stats span.kills').innerHTML = config.kills;
+    document.querySelector('div#inner').style.width = 100*(user.health/config.MAX_HP) + "%";
 }
 
 function makeBackground() {
