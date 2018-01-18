@@ -52,7 +52,8 @@ p, h4 {
     border-radius: 1em;
 }
 
-.stats summary {
+.stats > div {
+   margin: auto;
    min-width: 250px;
    max-width: 50%;
    width: 70%;
@@ -111,14 +112,16 @@ canvas {
     width: 100vw;
     min-width: 90vmax;
     max-width: 100vw;
-    height: 95vh;
-    max-height: 95vh;
-    margin-bottom: 10vh;
+    height: 85vh;
+    max-height: 85vh;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 #outer {
     flex: auto;
     min-width: 80px;
+    max-width: 70%;
     margin: auto;
     min-height: 15px;
     height: 2.5vh;
@@ -158,6 +161,8 @@ canvas {
       width: 100vw;
       height: 90vh;
       max-height: 90vh;
+      margin-top: 50px;
+      margin-bottom: 50px;
    }
 
    .stats img {
