@@ -17,8 +17,13 @@ function determineTankSize() {
    return window.innerWidth > window.innerHeight ? TANK_SIZE : MOBILE_TANK_SIZE
 }
 
+state = {
+   gameover: false,
+   running: false
+}
+
 config = {
-    username: "unset",
+    username: "",
     TANK_WIDTH : determineTankSize(),
     MODE : determineMode(),
     TANK_HEIGHT : Math.floor(determineTankSize() * 1.5),
@@ -31,7 +36,7 @@ config = {
     enemies : 2,
     level : 0,
     kills : 0
-};
+}
 
 function Smoke () {
     this.group = new Group();
@@ -94,7 +99,7 @@ function Shell () {
                 if (tanks[t].health <= 0) {
                     blasts.add(tanks[t].parts[0].position.x,tanks[t].parts[0].position.y);
                     if (tanks[t] === user) {
-                        gameover = true;
+                        state.gameover = true;
                     } else {
                         if (bullet.data.parent === user) {
                             if (tanks[t].team == user.team) {
@@ -107,7 +112,7 @@ function Shell () {
                         if (tanks[t].team) {
                             config.enemies--;
                             if (!config.enemies) {
-                                gameover = true;
+                                state.gameover = true;
                             }
                         }
                         tanks[t].remove();
@@ -543,14 +548,10 @@ function Tank (x,y,color,base_color,team) {
 }
 
 function gameOver () {
-    running = false;
+    state.running = false;
     var go = document.getElementById('gameover');
     if (config.enemies) {
         go.querySelector('p').innerHTML = "Game Over!";
-        config.enemies = 2;
-        config.level = 0;
-        config.score = 0;
-        config.kills = 0;
     } else {
         config.level++;
         go.querySelector('p').innerHTML = "Ready for a harder challenge?";
@@ -559,6 +560,12 @@ function gameOver () {
 }
 
 function resetGame() {
+    if (config.enemies) {
+      config.enemies = 2;
+      config.level = 0;
+      config.score = 0;
+      config.kills = 0;
+    }
     for (var i=1;i<tanks.length; i++) {
         tanks[i].remove();
     }
@@ -614,8 +621,8 @@ function gameInit() {
     tanks = [user];
     config.MODE == aspect.LANDSCAPE ? buildLandscapeSetup() : buildPortraitSetup();
 
-    running = true;
-    gameover = false;
+    state.running = true;
+    state.gameover = false;
 }
 
 function buildLandscapeSetup() {
@@ -689,7 +696,33 @@ function newGame() {
 //-----------------------------Main--------------------
 
 // loads newGame into global scope.
-window.newGame = newGame;
+window.Game = (function() {
+   // game state checks
+   return {
+      setName: function(name) {
+         config.username = name.substring(0,25);
+      },
+      getName: function() {
+         return config.username;
+      },
+      getScore: function() {
+         return config.score;
+      },
+      getLevel: function() {
+         return config.level;
+      },
+      getKills: function() {
+         return config.kills;
+      },
+      getEnemies: function() {
+         return config.enemies
+      },
+      isGameOver: function() {
+         return state.gameover
+      },
+      new: newGame
+   }
+})();
 
 // instigates a new game on load
 (function(){
@@ -705,7 +738,7 @@ function onKeyDown(event) {
     if (event.key == 'space') {
         user.fire();
     } else if (event.key == 'p') {
-        running = !running;
+        state.running = !state.running;
     }
     return false;
 }
@@ -741,7 +774,7 @@ function onFrame(event) {
     smoke.animate();
     blasts.animate();
     shells.move();
-    if (running) {
+    if (state.running) {
         processEvents();
 
         if (event.count % 2 == 0) {
@@ -758,7 +791,7 @@ function onFrame(event) {
             }
         }
 
-        if (gameover) {
+        if (state.gameover) {
             gameOver();
         }
     }
