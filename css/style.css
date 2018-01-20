@@ -222,19 +222,20 @@ a#script {
    margin: auto;
 }
 
+.footer {
+   padding: 1em;
+}
+
 footer {
-   font-size: small;
+   color: #ddd;
+   font-size: 0.8em;
    position:absolute;
    bottom: 0;
    background-color: #444;/* rgba(60,60,60,0.8);*/
    width: 100%;
 }
 
-.footer {
-    font-size: 0.85em;
-    padding: 1em;
-    color: #ddd;
-}
+
 
 .footer a, .attribution a {
     color: #fff;
