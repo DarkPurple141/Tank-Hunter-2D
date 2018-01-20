@@ -74,7 +74,6 @@ window.onload = () => {
       if (Game.isGameOver() && Game.getEnemies() > 0) {
          console.log("Game over")
          if (isInTop10(Game.getScore())) {
-            console.log("Top 10 YAY")
             postScore(
                Game.getName(),
                Game.getScore(),

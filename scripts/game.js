@@ -555,7 +555,7 @@ function gameOver () {
       go.querySelector('#topscores').style.display = "block";
     } else {
       config.level++;
-      go.querySelector('p').innerHTML = "Ready for a harder challenge?";
+      go.querySelector('p').innerHTML = "Level " + config.level;
       go.querySelector('#topscores').style.display = "none";
     }
     go.style.display = 'block';

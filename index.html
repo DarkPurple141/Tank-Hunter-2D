@@ -24,13 +24,16 @@
         <table>
            <tbody>
               <tr>
-                 <td>Level:</td><td><span class="level">0</span></td>
+                 <td><b>Level</b></td>
+                 <td><span class="level">0</span></td>
               </tr>
               <tr>
-                 <td>Score:</td><td><span class="score">0</span></td>
+                 <td><b>Score</b></td>
+                 <td><span class="score">0</span></td>
               </tr>
               <tr>
-                 <td>Kills:</td><td><span class="kills">0</span></td>
+                 <td><b>Kills</b></td>
+                 <td><span class="kills">0</span></td>
               </tr>
            </tbody>
         </table>
@@ -53,16 +56,18 @@
       <div class="inner">
          <div class="gameover-scores">
             <p>
-               Game Over!
+               <b>Game Over</b>
             </p>
+            <div class="button" onclick="Game.checkState()">
+               <p>
+                 Begin Game
+               </p>
+            </div>
             <div id="topscores">
-              <h4>Top Scores</h4>
+              <p>Top Scores</p>
               <ol>
               </ol>
             </div>
-            <p>
-              <a id="script" onclick="Game.checkState()">Play again?</a>
-            </p>
          </div>
       </div>
     </div>
@@ -74,7 +79,7 @@
       </h2>
     </nav>
     <footer>
-       <div id="footer" class="footer">
+       <div class="footer">
            <div>
               <a href=".">Tank Hunter</a>.
               To Play: <b>&#8592;</b> and <b>&#8594;</b> to rotate.  <b>&#8593;</b> and <b>&#8595;</b> to move tank.
@@ -84,7 +89,6 @@
     </footer>
     <script>
     function slide() {
-        //document.getElementById("settings").style.width = "250px";
         let slider = document.getElementById("settings")
        if (slider.style.width == "250px") {
            slider.style.width = "0px"
