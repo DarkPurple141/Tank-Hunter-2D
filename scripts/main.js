@@ -8,10 +8,28 @@ fetch(`${API_URL}/scores`)
    .then(data => {
       data.forEach(item => scores.push(item))
    })
-   .then(()=> {
-      console.log(scores)
-   })
    .catch(err => console.error(err))
+
+function loadScores() {
+   let list = document.querySelector('#topscores ol')
+   for (let s in scores) {
+      let el = document.createElement('li')
+
+      list.appendChild(el)
+      let div = document.createElement('div')
+
+      el.appendChild(div)
+
+      let name = document.createElement('p')
+      name.innerHTML = scores[s].name
+      div.appendChild(name)
+
+      let score = document.createElement('p')
+      score.innerHTML = scores[s].score
+      div.appendChild(score)
+
+   }
+}
 
 function postScore(username, score, level) {
    fetch(`${API_URL}/score`, {
@@ -26,8 +44,8 @@ function postScore(username, score, level) {
          'Content-Type': 'application/json'
       })
    })
-   .then(res => {
-      console.log(res)
+   .then(() => {
+      console.log("Score saved.")
    })
    .catch(err => console.error(err))
 }
@@ -46,7 +64,13 @@ function isInTop10(score) {
 }
 
 window.onload = () => {
+   let firstLoad = true
+
    Game.checkState = function() {
+      if (firstLoad) {
+         loadScores()
+         firstLoad = !firstLoad
+      }
       if (Game.isGameOver() && Game.getEnemies() > 0) {
          console.log("Game over")
          if (isInTop10(Game.getScore())) {
@@ -57,9 +81,8 @@ window.onload = () => {
                Game.getLevel()
             )
          }
-         Game.new()
-      } else {
-         Game.new()
       }
+      /* now restart the game */
+      Game.new()
    }
 }

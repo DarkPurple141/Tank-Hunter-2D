@@ -551,10 +551,12 @@ function gameOver () {
     state.running = false;
     var go = document.getElementById('gameover');
     if (config.enemies) {
-        go.querySelector('p').innerHTML = "Game Over!";
+      go.querySelector('p').innerHTML = "Game Over!";
+      go.querySelector('#topscores').style.display = "block";
     } else {
-        config.level++;
-        go.querySelector('p').innerHTML = "Ready for a harder challenge?";
+      config.level++;
+      go.querySelector('p').innerHTML = "Ready for a harder challenge?";
+      go.querySelector('#topscores').style.display = "none";
     }
     go.style.display = 'block';
 }
