@@ -6,11 +6,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #444;
 }
 
 body {
     color: #fff;
-    background-color: #444;
     font-family: "Open Sans";
     font-size: small;
     line-height: 2;
@@ -20,7 +20,7 @@ header {
    line-height: normal;
 }
 
-p, h4 {
+p, h3, h4 {
     margin: 0;
 }
 
@@ -28,6 +28,12 @@ b {
     background-color: #660000;
     padding-left: 0.25em;
     padding-right: 0.25em;
+}
+
+.logo {
+   margin: auto 0.5em;
+   font-size: 1.5em;
+   background-color: #660000;
 }
 
 .gameover a {
@@ -99,16 +105,21 @@ b {
 
 .stats table {
    flex: auto;
-   margin: auto;
+   margin: auto 1em;
    line-height: normal;
-}
-
-.stats tbody {
-   display: inline-block;
+   border-collapse: collapse;
 }
 
 .stats tbody tr {
    display: inline-table;
+}
+
+.stats table tr {
+   background-color: #882222;
+}
+
+.stats table td {
+   padding: 2px;
 }
 
 canvas {
@@ -191,6 +202,18 @@ footer {
     height: 100%;
 }
 
+@media screen and (min-width: 1100px) {
+   body {
+      max-width: 1100px;
+      margin: auto;
+   }
+
+   canvas {
+      min-width: 100%;
+      width: 100%;
+   }
+}
+
 @media screen and (max-width: 600px) {
    canvas {
       min-width: 100vw;
@@ -228,13 +251,21 @@ footer {
 .button {
    cursor: pointer;
    padding: 0.25em;
-   margin: auto;
+   margin: 0.5em auto;
    border: 1px solid #fff;
    border-radius: 0.5em;
    background-color: #660000;
 }
 
 .button:active {
+   background-color: #881111;
+}
+
+.button:hover {
+   background-color: #881111;
+}
+
+.button:focus {
    background-color: #881111;
 }
 

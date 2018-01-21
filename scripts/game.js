@@ -17,6 +17,11 @@ function determineTankSize() {
    return window.innerWidth > window.innerHeight ? TANK_SIZE : MOBILE_TANK_SIZE
 }
 
+function randomCongratulations() {
+   var congrats = ["Sick!", "Woah!", "Nice!", "Yiew!", "Yeeh!"]
+   return congrats[Math.floor(Math.random() * congrats.length)]
+}
+
 state = {
    gameover: false,
    running: false
@@ -551,11 +556,13 @@ function gameOver () {
     state.running = false;
     var go = document.getElementById('gameover');
     if (config.enemies > 0) {
-      go.querySelector('p').innerHTML = "Game Over!";
+      go.querySelector('h3').innerHTML = "Game Over";
+      go.querySelector('p').innerHTML = "But hey, thanks for playing!";
       go.querySelector('#topscores').style.display = "block";
     } else {
       config.level++;
-      go.querySelector('p').innerHTML = "Level " + config.level;
+      go.querySelector('h3').innerHTML = randomCongratulations();
+      go.querySelector('p').innerHTML = "Level " + config.level + " Up Next!";
       go.querySelector('#topscores').style.display = "none";
     }
     go.style.display = 'block';
