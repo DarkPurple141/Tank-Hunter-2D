@@ -1,4 +1,6 @@
-let scores = []
+/*
+populates the top scores list on load
+*/
 
 fetch(`${API_URL}/scores`)
    .then(res => res.json())

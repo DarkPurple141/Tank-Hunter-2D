@@ -7,9 +7,9 @@ Intending mobile interaction support.
 ## Version 1.2
 * Added Top-10 Scores List
 * More changes to CSS
-* FIX a big in scoring
-   * Player incorrectly credited for non-fatal shots on own team
-* Added live database 
+* FIX a bug in scoring
+   + Player incorrectly credited for non-fatal shots on own team
+* Added live database
 
 ## Version 1.1
 * Added better mobile support, and updated CSS.
