@@ -168,7 +168,7 @@ canvas {
 }
 
 footer {
-   font-size: 0.8em;
+   font-size: 0.8rem;
    position:absolute;
    bottom: 0;
    background-color: #444;/* rgba(60,60,60,0.8);*/
