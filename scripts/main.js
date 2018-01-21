@@ -54,7 +54,7 @@ function isInTop10(score) {
       return true
    // else check if in top 10.
    for (let s in scores) {
-      if (scores[s] < score) {
+      if (scores[s].score < score) {
          // new highscore
          return true
       }
@@ -78,7 +78,6 @@ window.onload = () => {
 
    Game.checkState = function() {
       if (Game.isGameOver() && Game.getEnemies() > 0) {
-         console.log("Game over")
          if (isInTop10(Game.getScore())) {
             console.log("New Top-10 score!")
             postScore(
