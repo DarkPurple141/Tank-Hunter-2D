@@ -77,6 +77,7 @@ function slide() {
 window.onload = () => {
 
    Game.checkState = function() {
+      console.log("This should always fire")
       if (Game.isGameOver() && Game.getEnemies() > 0) {
          console.log("Game over")
          if (isInTop10(Game.getScore())) {
