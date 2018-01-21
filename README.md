@@ -1,8 +1,15 @@
 # Tank-Hunter-2D
 A little toy 2D game made to experiment with paper.js. Game is currently available and playable [here](cheap-nation.surge.sh).
 
+## Version 1.3 (future release)
+Intending mobile interaction support.
+
 ## Version 1.2
-Coming soon. 
+* Added Top-10 Scores List
+* More changes to CSS
+* FIX a big in scoring
+   * Player incorrectly credited for non-fatal shots on own team
+* Added live database 
 
 ## Version 1.1
 * Added better mobile support, and updated CSS.

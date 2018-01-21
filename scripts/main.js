@@ -1,35 +1,33 @@
 
-let scores = []
 const API_URL = 'http://159.89.196.149/api/tanks'
 //const API_URL = 'http://localhost:8080/api/tanks'
 
-fetch(`${API_URL}/scores`)
-   .then(res => res.json())
-   .then(data => {
-      data.forEach(item => scores.push(item))
-   })
-   .catch(err => console.error(err))
-
 function loadScores() {
-   let list = document.querySelector('#topscores ol')
-   for (let s in scores) {
-      let el = document.createElement('li')
 
-      list.appendChild(el)
-      let div = document.createElement('div')
+   let ordered = scores.map((item, index) => {
+      return {
+         rank: index + 1,
+         name: item.name,
+         date: new Date(item.date).toLocaleDateString(),
+         level: item.level,
+         score: item.score
+      }
+   })
 
-      el.appendChild(div)
+   let list = document.querySelector('#topscores table tbody')
 
-      let name = document.createElement('p')
-      name.innerHTML = scores[s].name
-      div.appendChild(name)
+   for (let s in ordered) {
+      let row = document.createElement('tr')
 
-      let score = document.createElement('p')
-      score.innerHTML = scores[s].score
-      div.appendChild(score)
-
+      list.appendChild(row)
+      for (let key in ordered[s]) {
+         let td = document.createElement('td')
+         td.innerHTML = ordered[s][key]
+         row.appendChild(td)
+      }
    }
 }
+
 
 function postScore(username, score, level) {
    fetch(`${API_URL}/score`, {
@@ -63,14 +61,21 @@ function isInTop10(score) {
    return false
 }
 
+/**
+   controls slider for settings.
+*/
+function slide() {
+   let slider = document.getElementById("settings")
+   if (slider.style.width == "250px") {
+      slider.style.width = "0px"
+   } else {
+      slider.style.width = "250px"
+   }
+}
+
 window.onload = () => {
-   let firstLoad = true
 
    Game.checkState = function() {
-      if (firstLoad) {
-         loadScores()
-         firstLoad = !firstLoad
-      }
       if (Game.isGameOver() && Game.getEnemies() > 0) {
          console.log("Game over")
          if (isInTop10(Game.getScore())) {

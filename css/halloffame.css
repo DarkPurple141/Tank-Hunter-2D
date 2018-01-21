@@ -1,0 +1,32 @@
+
+#topscores {
+   font-size: 0.8em;
+   margin: auto;
+   padding: 0.5em;
+}
+
+#topscores table {
+   font-weight: normal;
+   border-collapse: collapse;
+   border-radius: 1em;
+}
+
+#topscores table td, #topscores table th {
+   padding: 5px;
+}
+
+#topscores table tr:nth-child(even) {
+   background-color: #555;
+}
+
+#topscores table tr:nth-child(odd) {
+   background-color: #666;
+}
+
+#topscores table thead tr th {
+   background-color: #660000;
+}
+
+#topscores table tr:hover {
+   background-color: #666;
+}

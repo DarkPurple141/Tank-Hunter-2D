@@ -11,7 +11,8 @@
         <!-- Load the Database -->
         <script type="text/javascript" src="scripts/main.js"></script>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/main.css"/>
+        <link rel="stylesheet" href="css/halloffame.css"/>
     </head>
 <body>
    <header class="stats">
@@ -56,17 +57,28 @@
       <div class="inner">
          <div class="gameover-scores">
             <p>
-               <b>Game Over</b>
+               <b>The Tank Hunter Top 10</b>
             </p>
+            <div id="topscores">
+               <table>
+                  <thead>
+                     <tr>
+                       <th>#</th>
+                       <th>Name</th>
+                       <th>Date</th>
+                       <th>Level</th>
+                       <th>Score</th>
+                     </tr>
+                  </thead>
+                   <tbody>
+                      <!-- scores will be injected here-->
+                   </tbody>
+               </table>
+            </div>
             <div class="button" onclick="Game.checkState()">
                <p>
-                 Start Next Level
+                 Start
                </p>
-            </div>
-            <div id="topscores">
-              <p>Top Scores</p>
-              <ol>
-              </ol>
             </div>
          </div>
       </div>
@@ -75,27 +87,17 @@
     </canvas>
     <nav class="sidenav" id="settings">
       <h2>
-         Coming sometime in 2018..
+         Settings (Eventually)
       </h2>
     </nav>
     <footer>
        <div class="footer">
            <div>
-              <a href=".">Tank Hunter</a>.
               To Play: <b>&#8592;</b> and <b>&#8594;</b> to rotate.  <b>&#8593;</b> and <b>&#8595;</b> to move tank.
               <b>A</b> and <b>D</b> rotate turret. <b>Space</b> to fire. <b>P</b> to pause.
            </div>
        </div>
     </footer>
-    <script>
-    function slide() {
-        let slider = document.getElementById("settings")
-       if (slider.style.width == "250px") {
-           slider.style.width = "0px"
-       } else {
-           slider.style.width = "250px"
-       }
-    }
-    </script>
+    <script src="scripts/load.js" type="text/javascript"></script>
 </body>
 </html>

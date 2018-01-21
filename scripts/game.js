@@ -94,7 +94,7 @@ function Shell () {
                     this.animateBackground(true);
                 } else if (bullet.data.parent === user) {
                     // if user hits someone score increases.
-                    config.score += 10;
+                    config.score += tanks[t].team === user.team ? -10 : 10;
                 }
                 if (tanks[t].health <= 0) {
                     blasts.add(tanks[t].parts[0].position.x,tanks[t].parts[0].position.y);
@@ -550,7 +550,7 @@ function Tank (x,y,color,base_color,team) {
 function gameOver () {
     state.running = false;
     var go = document.getElementById('gameover');
-    if (config.enemies) {
+    if (config.enemies > 0) {
       go.querySelector('p').innerHTML = "Game Over!";
       go.querySelector('#topscores').style.display = "block";
     } else {

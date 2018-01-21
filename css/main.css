@@ -12,7 +12,7 @@ body {
     color: #fff;
     background-color: #444;
     font-family: "Open Sans";
-    font-size: medium;
+    font-size: small;
     line-height: 2;
 }
 
@@ -28,27 +28,6 @@ b {
     background-color: #660000;
     padding-left: 0.25em;
     padding-right: 0.25em;
-}
-
-#topscores h4 {
-   text-align: center;
-}
-
-#topscores ol {
-   font-size: 0.5em;
-   margin: auto;
-   padding: 0;
-}
-
-#topscores ol li div {
-   display: flex;
-   flex-direction: row;
-}
-
-#topscores ol li div p {
-   width: 40%;
-   margin: 0 5%;
-   padding: 1px;
 }
 
 .gameover a {
@@ -124,11 +103,11 @@ b {
    line-height: normal;
 }
 
-tbody {
+.stats tbody {
    display: inline-block;
 }
 
-tbody tr {
+.stats tbody tr {
    display: inline-table;
 }
 
@@ -137,10 +116,9 @@ canvas {
     width: 100vw;
     min-width: 90vmax;
     max-width: 100vw;
-    height: 85vh;
-    max-height: 85vh;
-    margin-top: 70px;
-    margin-bottom: 70px;
+    min-height: 90vh;
+    max-height: 95vh;
+    margin: 2.5vh 0;
 }
 
 .sidenav {
@@ -213,12 +191,6 @@ footer {
     height: 100%;
 }
 
-@media screen and (max-height: 550px) {
-   html, body {
-      font-size: small;
-   }
-}
-
 @media screen and (max-width: 600px) {
    canvas {
       min-width: 100vw;
@@ -232,10 +204,6 @@ footer {
    .stats img {
       max-width: 20px;
       max-height: 20px;
-   }
-
-   html, body {
-      font-size: small;
    }
 }
 
@@ -253,6 +221,8 @@ footer {
    background-color: #444;
    padding: 1em;
    text-align: center;
+   border: 1px solid #fff;
+   border-radius: 0.5em;
 }
 
 .button {
@@ -271,7 +241,6 @@ footer {
 .gameover {
     display: none;
     position: fixed;
-    font-size: 1.5em;
     font-weight: bold;
     width: 100%;
     height: 100%;
