@@ -209,8 +209,9 @@ footer {
    }
 
    canvas {
-      min-width: 100%;
-      width: 100%;
+      min-width: 85vw;
+      width: 85vw;
+      margin: 2.5vh auto;
    }
 }
 
