@@ -9,3 +9,10 @@ fetch(`${API_URL}/scores`)
    })
    .then(loadScores)
    .catch(err => console.error(err))
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){
+   dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', 'UA-25942721-3');
