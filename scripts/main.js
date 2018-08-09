@@ -1,7 +1,6 @@
 
-const API_URL = 'https://159.89.196.149/api/tanks'
+const API_URL = 'https://api.alhinds.com/api/tanks'
 let scores = []
-//const API_URL = 'http://localhost:8080/api/tanks'
 
 function loadScores() {
 

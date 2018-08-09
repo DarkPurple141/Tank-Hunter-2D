@@ -1,5 +1,5 @@
 # Tank-Hunter-2D
-A little toy 2D game made to experiment with paper.js. Game is currently available and playable [here](cheap-nation.surge.sh).
+A little toy 2D game made to experiment with paper.js. Game is currently available and playable [here](https://alhinds.com/Tank-Hunter-2D).
 
 ## Version 1.3 (future release)
 Intending mobile interaction support.
